@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "501528274736",
+    "project_id": "mobilepayroll-1957b",
+    "storage_bucket": "mobilepayroll-1957b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501528274736:android:12bd8ca67f40c9c2a5caf5",
+        "android_client_info": {
+          "package_name": "com.example.mobilepayroll"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQuI84yEWzjeulAsSp2h4p9xPVXHA7oRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
