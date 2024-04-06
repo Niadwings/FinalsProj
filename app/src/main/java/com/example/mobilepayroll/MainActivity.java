@@ -43,18 +43,16 @@ protected void onCreate(Bundle savedInstanceState) {
         }
     });
 }
-    public void signInWithCredentials(final String username, final String password) {
+    public void signInWithCredentials(final String admin, final String password) {
         db.collection("admin")
-                .document(username)
+                .document(admin)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             String storedPassword = document.getString("password");
-                            String storedUsername = document.getString("username");
-                            if (storedPassword != null && storedPassword.equals(password) &&
-                                    storedUsername != null && storedUsername.equals(username)) {
+                            if (storedPassword != null && storedPassword.equals(password)) {
                                 // Passwords match, login successful
                                 Toast.makeText(MainActivity.this, "Login successful.",
                                         Toast.LENGTH_SHORT).show();
@@ -74,7 +72,7 @@ protected void onCreate(Bundle savedInstanceState) {
                     } else {
                         // Error getting document
                         Toast.makeText(MainActivity.this, "Error: " +
-                                        Objects.requireNonNull(task.getException()).getMessage(), // Log the exception message
+                                        Objects.requireNonNull(task.getException()).getMessage(),
                                 Toast.LENGTH_SHORT).show();
                         Log.e("MainActivity", "Error getting document", task.getException());
                     }
