@@ -16,7 +16,7 @@
         android:layout_marginEnd="4dp"
         android:background="@drawable/gradient"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
         android:id="@+id/inputPassword"
@@ -26,6 +26,7 @@
         android:background="@drawable/custom_outline"
         android:ems="10"
         android:hint="Password"
+        android:padding="12dp"
         android:inputType="textPassword"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/ForgotPass"
@@ -54,7 +55,8 @@
         android:layout_height="49dp"
         android:background="@drawable/custom_outline"
         android:ems="10"
-        android:hint="Username or email"
+        android:hint="Email or username"
+        android:padding="12dp"
         android:inputType="textEmailAddress"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -92,19 +94,6 @@
         app:srcCompat="@drawable/weprintlogo" />
 
     <ImageButton
-        android:id="@+id/openlock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/inputPassword"
-        app:layout_constraintEnd_toEndOf="@+id/inputPassword"
-        app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintStart_toStartOf="@+id/inputPassword"
-        app:layout_constraintTop_toTopOf="@+id/inputPassword"
-        app:layout_constraintVertical_bias="0.44"
-        app:srcCompat="@drawable/open_lock" />
-
-    <ImageButton
         android:id="@+id/closelock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -117,5 +106,18 @@
         app:layout_constraintTop_toTopOf="@+id/inputPassword"
         app:layout_constraintVertical_bias="0.44"
         app:srcCompat="@drawable/close_lock" />
+
+    <ImageButton
+        android:id="@+id/openlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/inputPassword"
+        app:layout_constraintEnd_toEndOf="@+id/inputPassword"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="@+id/inputPassword"
+        app:layout_constraintTop_toTopOf="@+id/inputPassword"
+        app:layout_constraintVertical_bias="0.44"
+        app:srcCompat="@drawable/open_lock" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
