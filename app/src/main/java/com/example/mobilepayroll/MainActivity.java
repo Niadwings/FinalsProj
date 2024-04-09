@@ -3,8 +3,10 @@ package com.example.mobilepayroll;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,34 +20,40 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
-    EditText usernameEditText, passwordEditText;
-
     @Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-    db = FirebaseFirestore.getInstance();
-    FirebaseApp.initializeApp(this);
-    usernameEditText = findViewById(R.id.inputEmail);
-    passwordEditText = findViewById(R.id.inputPassword);
-    Button signinButton = findViewById(R.id.signbtn);
+        db = FirebaseFirestore.getInstance();
+        EditText usernameEditText = findViewById(R.id.inputEmail);
+        EditText passwordEditText = findViewById(R.id.inputPassword);
+        Button signinButton = findViewById(R.id.signbtn);
+        TextView signup = findViewById(R.id.Sign_up);
 
-    signinButton.setOnClickListener(v -> {
-        String username = usernameEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
+        signinButton.setOnClickListener(v -> {
+            String username = usernameEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
 
-        if (!username.isEmpty() && !password.isEmpty()) {
-            signInWithCredentials(username, password);
-        } else {
-            Toast.makeText(MainActivity.this, "Please enter username and password.",
-                    Toast.LENGTH_SHORT).show();
-        }
-    });
-}
+            if (!username.isEmpty() && !password.isEmpty()) {
+                signInWithCredentials(username, password);
+            } else {
+                Toast.makeText(MainActivity.this, "Please enter username and password.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Signup.class);
+                startActivity(intent);
+            }
+        });
+    }
     public void signInWithCredentials(final String admin, final String password) {
-        db.collection("admin")
-                .document(admin)
+        db.collection("users")
+                .document("username")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -77,7 +85,7 @@ protected void onCreate(Bundle savedInstanceState) {
                         Log.e("MainActivity", "Error getting document", task.getException());
                     }
                 });
-    }
 
+    }
 }
 

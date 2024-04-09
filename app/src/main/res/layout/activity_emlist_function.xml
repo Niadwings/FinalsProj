@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.972" />
 
     <Button
-        android:id="@+id/namebar1"
+        android:id="@+id/namebar"
         android:layout_width="365dp"
         android:layout_height="93dp"
         android:backgroundTint="#e8e8e8"
@@ -75,7 +75,7 @@
         app:layout_constraintVertical_bias="0.34" />
 
     <Button
-        android:id="@+id/namebar2"
+        android:id="@+id/namebar"
         android:layout_width="365dp"
         android:layout_height="93dp"
         android:backgroundTint="#e8e8e8"
@@ -101,12 +101,11 @@
         app:layout_constraintVertical_bias="0.713" />
 
     <TextView
-        android:id="@+id/textView44"
+        android:id="@+id/textView4"
         android:layout_width="81dp"
         android:layout_height="27dp"
         android:text="All"
         android:textAlignment="center"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.006"
@@ -115,12 +114,11 @@
         app:layout_constraintVertical_bias="0.223" />
 
     <TextView
-        android:id="@+id/textView45"
+        android:id="@+id/textView4"
         android:layout_width="81dp"
         android:layout_height="27dp"
         android:text="Production"
         android:textAlignment="center"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -129,12 +127,11 @@
         app:layout_constraintVertical_bias="0.223" />
 
     <TextView
-        android:id="@+id/textView46"
+        android:id="@+id/textView4"
         android:layout_width="81dp"
         android:layout_height="27dp"
         android:text="Support"
         android:textAlignment="center"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.742"
@@ -143,12 +140,11 @@
         app:layout_constraintVertical_bias="0.223" />
 
     <TextView
-        android:id="@+id/textView47"
+        android:id="@+id/textView4"
         android:layout_width="83dp"
         android:layout_height="27dp"
         android:text="Logistics"
         android:textAlignment="center"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.993"
@@ -157,12 +153,11 @@
         app:layout_constraintVertical_bias="0.223" />
 
     <TextView
-        android:id="@+id/textView48"
+        android:id="@+id/textView4"
         android:layout_width="81dp"
         android:layout_height="27dp"
         android:text="Admins"
         android:textAlignment="center"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.251"
@@ -184,7 +179,7 @@
         app:layout_constraintVertical_bias="0.337" />
 
     <ImageButton
-        android:id="@+id/imageButton1"
+        android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
@@ -197,7 +192,7 @@
         app:srcCompat="@drawable/more_icon" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
@@ -235,32 +230,6 @@
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="319dp" />
 
-    <ImageButton
-        android:id="@+id/userprofile_btn1"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/togglebar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.889"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/togglebar"
-        app:layout_constraintVertical_bias="0.363"
-        app:srcCompat="@drawable/profile_account" />
-
-    <ImageButton
-        android:id="@+id/userprofile_btn2"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/togglebar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.889"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/togglebar"
-        app:layout_constraintVertical_bias="0.363"
-        app:srcCompat="@drawable/profile_account" />
-
     <TextView
         android:id="@+id/textPayslip"
         android:layout_width="wrap_content"
@@ -268,23 +237,10 @@
         android:text="Payslip"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/togglebar"
-        app:layout_constraintEnd_toEndOf="@+id/payslip_btn4"
-        app:layout_constraintStart_toStartOf="@+id/payslip_btn4"
-        app:layout_constraintTop_toBottomOf="@+id/payslip_btn4"
+        app:layout_constraintEnd_toEndOf="@+id/payslip_btn"
+        app:layout_constraintStart_toStartOf="@+id/payslip_btn"
+        app:layout_constraintTop_toBottomOf="@+id/payslip_btn"
         app:layout_constraintVertical_bias="0.0" />
-
-    <ImageButton
-        android:id="@+id/payslip_btn4"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/togglebar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.368"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/togglebar"
-        app:layout_constraintVertical_bias="0.363"
-        app:srcCompat="@drawable/payslip_icon" />
 
     <TextView
         android:id="@+id/textComputation"
@@ -335,24 +291,11 @@
         app:layout_constraintHorizontal_bias="0.628"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/togglebar"
-        app:layout_constraintVertical_bias="0.358"
+        app:layout_constraintVertical_bias="0.363"
         app:srcCompat="@drawable/payroll_icon" />
 
     <ImageButton
-        android:id="@+id/payslip_btn2"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/togglebar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.368"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/togglebar"
-        app:layout_constraintVertical_bias="0.363"
-        app:srcCompat="@drawable/payslip_icon" />
-
-    <ImageButton
-        android:id="@+id/payslip_btn1"
+        android:id="@+id/payslip_btn"
         android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
