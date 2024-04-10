@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void signInWithCredentials(final String admin, final String password) {
+    public void signInWithCredentials(final String username, final String password) {
         db.collection("users")
-                .document("username")
+                .document(username)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else {
                                 // Passwords don't match
-                                Toast.makeText(MainActivity.this, "Incorrect password.",
+                                Toast.makeText(MainActivity.this, "Incorrect password." + encryptPassword(password),
                                         Toast.LENGTH_SHORT).show();
                             }
                         } else {
