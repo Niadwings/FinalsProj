@@ -1,3 +1,4 @@
+
 package com.example.mobilepayroll;
 
 import android.content.Intent;
@@ -15,13 +16,16 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             String storedPassword = document.getString("password");
-                            if (storedPassword != null && storedPassword.equals(password)) {
+                            if (storedPassword != null && storedPassword.equals(encryptPassword(password))) {
                                 // Passwords match, login successful
                                 Toast.makeText(MainActivity.this, "Login successful.",
                                         Toast.LENGTH_SHORT).show();
@@ -87,5 +91,21 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-}
 
+    public String encryptPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}

@@ -1,3 +1,4 @@
+
 package com.example.mobilepayroll;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,17 +46,23 @@ public class Signup extends AppCompatActivity {
                 String password = user_pass.getText().toString();
                 String confirmPassword = confirm_Password.getText().toString();
 
-                if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
-                    Toast.makeText(Signup.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) ||
+                        TextUtils.isEmpty(confirmPassword)) {
+                    Toast.makeText(Signup.this, "Please fill in all fields",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (!isValidPassword(password)) {
-                    Toast.makeText(Signup.this, "Password must be 6 or more characters long and contain both letters and numbers", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Signup.this, "At least 6 or more characters long" +
+                            " with letters and numbers", Toast.LENGTH_SHORT).show();
                     return;
+
+
                 }
                 if (!password.equals(confirmPassword)) {
-                    Toast.makeText(Signup.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Signup.this, "Passwords do not match",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -60,20 +70,23 @@ public class Signup extends AppCompatActivity {
                 // Create a Map object to store user data
                 Map<String, Object> userData = new HashMap<>();
                 userData.put("username", username);
-                userData.put("password", password);
+                userData.put("password", encryptPassword(password));
 
-                db.collection("users").document("username")
+
+                db.collection("users").document(username)
                         .set(userData)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(Signup.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Signup.this, "Registration successful",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Signup.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Signup.this, "Error: " + e.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
                             }
                         });
             }
@@ -90,6 +103,22 @@ public class Signup extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        
+
+    }
+    public String encryptPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
