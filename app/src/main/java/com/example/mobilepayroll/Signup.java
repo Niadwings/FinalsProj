@@ -1,20 +1,19 @@
-
 package com.example.mobilepayroll;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.nio.charset.StandardCharsets;
@@ -24,7 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Signup extends AppCompatActivity {
-    FirebaseFirestore db;
+
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,66 +33,61 @@ public class Signup extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        EditText user_name = findViewById(R.id.input_name);
-        EditText user_pass = findViewById(R.id.input_password);
-        EditText confirm_Password = findViewById(R.id.confirm_password);
-        Button registerButton = findViewById(R.id.sign_up);
-        TextView login = findViewById(R.id.log_in);
+        TextView user_name = findViewById(R.id.textUsername);
+        TextView user_pass = findViewById(R.id.textPassword);
+
+        TextView login = findViewById(R.id.login_link);
+
+        Button registerButton = findViewById(R.id.signup_btn);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String username = user_name.getText().toString().trim();
-                String password = user_pass.getText().toString();
-                String confirmPassword = confirm_Password.getText().toString();
+    public void onClick(View v) {
+        String username = user_name.getText().toString().trim();
+        String password = user_pass.getText().toString();
 
-                if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) ||
-                        TextUtils.isEmpty(confirmPassword)) {
-                    Toast.makeText(Signup.this, "Please fill in all fields",
-                            Toast.LENGTH_SHORT).show();
-                    return;
+        // Create a new map to store user data
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("username", username);
+        userData.put("password", encryptpassword(password));
+
+        // reference to the "users" collection and add a new document with auto-generated ID
+        CollectionReference usersRef = db.collection("users");
+        usersRef.add(userData)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        // Document successfully added with auto-generated ID
+                        Toast.makeText(Signup.this, "Registered Succesfully",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle errors
+                        Toast.makeText(Signup.this, "Error adding user: "
+                                        + e.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+            public String encryptpassword(String password) {
+                try {
+                    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                    byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+                    StringBuilder hexString = new StringBuilder();
+                    for (byte b : hash) {
+                        String hex = Integer.toHexString(0xff & b);
+                        if (hex.length() == 1) hexString.append('0');
+                        hexString.append(hex);
+                    }
+                    return hexString.toString();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                    return null;
                 }
-
-                if (!isValidPassword(password)) {
-                    Toast.makeText(Signup.this, "At least 6 or more characters long" +
-                            " with letters and numbers", Toast.LENGTH_SHORT).show();
-                    return;
-
-
-                }
-                if (!password.equals(confirmPassword)) {
-                    Toast.makeText(Signup.this, "Passwords do not match",
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-
-                // Create a Map object to store user data
-                Map<String, Object> userData = new HashMap<>();
-                userData.put("username", username);
-                userData.put("password", encryptPassword(password));
-
-
-                db.collection("users").document(username)
-                        .set(userData)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(Signup.this, "Registration successful",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Signup.this, "Error: " + e.getMessage(),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-
-            public boolean isValidPassword(String password) {
-                return password.length() >= 6 && password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$");
             }
         });
 
@@ -103,22 +98,5 @@ public class Signup extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-    }
-    public String encryptPassword(String password) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }

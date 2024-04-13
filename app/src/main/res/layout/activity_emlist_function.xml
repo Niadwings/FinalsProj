@@ -13,7 +13,7 @@
         android:id="@+id/text_greet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome Admin,"
+        android:text="Welcome admin,"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
@@ -23,8 +23,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="115dp"
-        android:layout_height="35dp"
+        android:layout_width="102dp"
+        android:layout_height="33dp"
         android:text="Wes Festin"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,6 +33,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.056" />
+
+
 
     <Button
         android:id="@+id/searchbar"
@@ -106,6 +108,7 @@
         android:layout_height="27dp"
         android:text="All"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.006"
@@ -119,6 +122,7 @@
         android:layout_height="27dp"
         android:text="Production"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -132,6 +136,7 @@
         android:layout_height="27dp"
         android:text="Support"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.742"
@@ -145,6 +150,7 @@
         android:layout_height="27dp"
         android:text="Logistics"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.993"
@@ -158,6 +164,7 @@
         android:layout_height="27dp"
         android:text="Admins"
         android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.251"
