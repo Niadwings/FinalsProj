@@ -58,10 +58,4 @@ public class Profilepage_function extends AppCompatActivity {
         });
 
     }
-    public void logout(View view) {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(Profilepage_function.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }
